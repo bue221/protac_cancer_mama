@@ -1,0 +1,16 @@
+receptor = 02_preparacion_pdbqt/receptor_hsp90.pdbqt
+ligand = 02_preparacion_pdbqt/ligando_protac.pdbqt
+
+center_x = 20.362
+center_y = 9.405
+center_z = -32.578
+
+size_x = 30.0
+size_y = 30.0
+size_z = 30.0
+
+exhaustiveness = 8
+num_modes = 9
+energy_range = 4.0
+
+out = 03_docking_secuencial/resultado_docking1_hsp90.pdbqt

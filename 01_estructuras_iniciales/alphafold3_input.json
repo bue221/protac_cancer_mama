@@ -1,0 +1,30 @@
+{
+  "name": "Complejo_Ternario_Hsp90_PROTAC_AUY922_VHL",
+  "modelSeeds": [
+    42
+  ],
+  "sequences": [
+    {
+      "protein": {
+        "id": "A",
+        "description": "Hsp90-alpha N-terminal domain (UniProt P07900, residuos 9-236)",
+        "sequence": "DQPMEEEEVETFAFQAEIAQLMSLIINTFYSNKEIFLRELISNSSDALDKIRYESLTDPSKLDSGKELHINLIPNKQDRTLTIVDTGIGMTKADLINNLGTIAKSGTKAFMEALQAGADISMIGQFGVGFYSAYLVAEKVTVITKHNDDEQYAWESSAGGSFTVRTDTGEPMGRGTKVILHLKEDQTEYLEERRIKEIVKKHSQFIGYPITLFVEKERDKEVSDDEAE"
+      }
+    },
+    {
+      "protein": {
+        "id": "B",
+        "description": "Von Hippel-Lindau (VHL) E3 ligase domain (UniProt P40337, residuos 54-213)",
+        "sequence": "MEAGRPRPVLRSVNSREPSQVIFCNRSPRVVLPVWLNFDGEPQPYPTLPPGTGRRIHSYRGHLWLFRDAGTHDGLLVNQTELFVPSLNVDGQPIFANITLPVYTLKERCLQVVRSLVKPENYRRLDIVRSLYEDLEDHPNVQKDLERLTQERIAHQRMGD"
+      }
+    },
+    {
+      "ligand": {
+        "id": "C",
+        "smiles": "O=C(c1noc(-c2cc(C(C)C)c(O)cc2O)c1-c3ccc(CN4CCOCC4)cc3)NCCOCCOCC(=O)N[C@@H](C(C)(C)C)C(=O)N5C[C@H](O)C[C@H]5C(=O)NCc6ccc(-c7scnc7C)cc6"
+      }
+    }
+  ],
+  "dialect": "alphafold3",
+  "version": 1
+}

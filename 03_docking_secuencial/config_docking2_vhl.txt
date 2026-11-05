@@ -1,0 +1,16 @@
+receptor = 02_preparacion_pdbqt/receptor_vhl.pdbqt
+ligand = 03_docking_secuencial/mejor_pose_hsp90.pdbqt
+
+center_x = 4.265
+center_y = 7.318
+center_z = -12.503
+
+size_x = 30.0
+size_y = 30.0
+size_z = 30.0
+
+exhaustiveness = 8
+num_modes = 9
+energy_range = 4.0
+
+out = 03_docking_secuencial/resultado_docking2_vhl.pdbqt

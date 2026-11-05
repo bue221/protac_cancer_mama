@@ -1,0 +1,6 @@
+numpy>=2.0.0
+scipy>=1.14.0
+rdkit>=2024.3.1
+meeko>=0.8.0
+gemmi>=0.7.0
+pillow>=10.0.0

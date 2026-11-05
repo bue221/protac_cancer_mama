@@ -1,0 +1,13 @@
+# Entornos virtuales y caché de Python
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos temporales del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos temporales intermedios
+vhl_aligned_core.pdb
+vhl_aligned_full.pdb

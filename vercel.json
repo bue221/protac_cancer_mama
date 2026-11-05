@@ -1,0 +1,11 @@
+{
+  "buildCommand": "",
+  "installCommand": "",
+  "outputDirectory": "05_visor_3d",
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    }
+  ]
+}

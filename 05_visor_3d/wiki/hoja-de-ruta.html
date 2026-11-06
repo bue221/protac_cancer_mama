@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hoja de ruta · Wiki PROTAC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;550;650&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body>
+  <header class="topnav">
+    <a class="brand" href="../index.html">PROTAC <span>HSP90α–VHL</span></a>
+    <nav class="nav-links">
+      <a href="../index.html">Inicio</a>
+      <a href="../viabilidad.html">Viabilidad lab</a>
+      <a href="../visor.html">Visor 3D</a>
+      <a class="active" href="index.html">Wiki</a>
+    </nav>
+  </header>
+  <main class="wrap prose">
+    <p><a href="index.html">← Wiki</a></p>
+    <h1 style="font-family:var(--font-display);color:var(--text)">Hoja de ruta</h1>
+    <p>Del modelo geométrico actual a evidencia más fuerte (computacional y experimental).</p>
+
+    <h2>1. Ya disponible en este repo</h2>
+    <ul>
+      <li>Construcción 3D del PROTAC (RDKit)</li>
+      <li>Docking secuencial (AutoDock Vina)</li>
+      <li>Ensamblaje ternario + PPI</li>
+      <li>Checklist de viabilidad de laboratorio (<a href="../viabilidad.html">ver reporte</a>)</li>
+    </ul>
+
+    <h2>2. Siguiente nivel computacional</h2>
+    <ul>
+      <li><b>AlphaFold 3</b> con <code>01_estructuras_iniciales/alphafold3_input.json</code></li>
+      <li><b>HADDOCK</b> para docking PPI semiflexible con agua</li>
+      <li><b>MD</b> (GROMACS/OpenMM) 50–100 ns + MM/GBSA</li>
+    </ul>
+
+    <h2>3. Siguiente nivel de laboratorio</h2>
+    <ul>
+      <li>Síntesis convergente AUY922 + PEG2 + VH032 (acoples amida)</li>
+      <li>Confirmación LC-MS / NMR</li>
+      <li>Ensayo celular de degradación de HSP90 (Western blot)</li>
+    </ul>
+
+    <footer class="footer">Detalle en <code>wiki/Hoja-de-Ruta-HADDOCK-y-Dinamica-Molecular.md</code>.</footer>
+  </main>
+</body>
+</html>

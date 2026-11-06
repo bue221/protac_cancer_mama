@@ -11,3 +11,7 @@ Thumbs.db
 # Archivos temporales intermedios
 vhl_aligned_core.pdb
 vhl_aligned_full.pdb
+
+# Frontend React
+web/node_modules/
+web/dist/

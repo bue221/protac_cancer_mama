@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FAQ · Wiki PROTAC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;550;650&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body>
+  <header class="topnav">
+    <a class="brand" href="../index.html">PROTAC <span>HSP90α–VHL</span></a>
+    <nav class="nav-links">
+      <a href="../index.html">Inicio</a>
+      <a href="../viabilidad.html">Viabilidad lab</a>
+      <a href="../visor.html">Visor 3D</a>
+      <a class="active" href="index.html">Wiki</a>
+    </nav>
+  </header>
+  <main class="wrap prose">
+    <p><a href="index.html">← Wiki</a></p>
+    <h1 style="font-family:var(--font-display);color:var(--text)">Preguntas frecuentes</h1>
+
+    <h2>¿AutoDock Vina es un programa o un framework?</h2>
+    <p>Es un <b>programa ejecutable</b> de línea de comandos. No abre ventana gráfica: recibe PDBQT + config y escribe poses ranqueadas.</p>
+
+    <h2>¿El score de Vina es un Kd experimental?</h2>
+    <p>No. Es un score empírico en kcal/mol útil para comparar poses. Convertirlo a Kd es una analogía pedagógica, no una medición de laboratorio.</p>
+
+    <h2>¿Por qué hay docking secuencial y no un solo docking ternario?</h2>
+    <p>Vina acopla un ligando contra un receptor. El complejo ternario se ensambla después alineando las poses de HSP90 y VHL y optimizando torsiones del linker.</p>
+
+    <h2>¿La viabilidad computacional garantiza síntesis exitosa?</h2>
+    <p>No. Indica que la molécula es química y modularmente razonable (bloques conocidos, SA Score tolerable, sin choques graves). Un químico aún debe definir protectores, condiciones y purificación.</p>
+
+    <h2>¿Qué archivo 3D debo abrir?</h2>
+    <p>Para visualización y PPI: <code>complejo_ternario_limpio.pdb</code> (dominios catalíticos). Para contexto completo de cadenas: <code>complejo_ternario_completo.pdb</code>.</p>
+
+    <footer class="footer">Fuente: <code>wiki/Preguntas-Frecuentes-FAQ.md</code>.</footer>
+  </main>
+</body>
+</html>

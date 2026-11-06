@@ -36,11 +36,13 @@ La arquitectura tripartita de la molécula PROTAC es:
 | `scripts/01_construir_protac.py` | **Paso 1:** Construye el PROTAC desde SMILES, genera confórmeros 3D (`ETKDGv3`), minimiza con `MMFF94s` y exporta a `01_estructuras_iniciales/`. |
 | `scripts/02_ensamblar_complejo_ternario.py` | **Paso 2:** Fusiona las poses de Docking 1 y 2, optimiza las torsiones del linker PEG2 para maximizar la interfaz Proteína–Proteína (PPI) sin choques estéricos (`< 2.5 Å`), ejecuta `./bin/vina --local_only` y reconstruye los PDB con conectividades RDKit (`CONECT`) en `04_complejo_ternario_final/`. |
 | `scripts/03_analizar_estabilidad.py` | **Paso 3:** Calcula $\Delta G$, $K_d$, energía intermolecular, choques estéricos, contactos PPI y extensión del puente PEG2. |
+| `scripts/04_viabilidad_laboratorio.py` | **Paso 4:** Checklist de viabilidad de laboratorio (SA Score, bloques modulares, alertas PAINS/Brenk, estereoquímica, choques PPI) → `05_visor_3d/data/viabilidad_laboratorio.json`. |
 | `01_estructuras_iniciales/` | Contiene `hsp90.pdb`, `vhl.pdb`, `protac.pdb`, `protac.sdf` y `alphafold3_input.json`. |
 | `02_preparacion_pdbqt/` | Contiene `receptor_hsp90.pdbqt`, `receptor_vhl.pdbqt` y `ligando_protac.pdbqt` generados con Meeko 0.8.0. |
 | `03_docking_secuencial/` | Contiene `config_docking1_hsp90.txt`, `resultado_docking1_hsp90.pdbqt`, `mejor_pose_hsp90.pdb/.pdbqt`, `macromodelo_hsp90_protac.pdb/.pdbqt`, `config_docking2_vhl.txt` y `resultado_docking2_vhl.pdbqt`. |
 | `04_complejo_ternario_final/` | Contiene `complejo_ternario_limpio.pdb` (dominios catalíticos plegados + `CONECT`), `complejo_ternario_completo.pdb`, `protac_en_complejo.pdb/.pdbqt` y `receptor_ternario_hsp90_vhl.pdbqt`. |
-| `05_visor_3d/` | Contiene `visor_3d_complejo_ternario.html` (visor interactivo autónomo con `3Dmol.js`). |
+| `web/` | Portal React + Vite + shadcn/ui (inicio, viabilidad, visor 3Dmol, wiki). Build → `web/dist` (Vercel). |
+| `05_visor_3d/` | Portal HTML legacy (referencia). El despliegue activo usa `web/`. |
 | `docs/` y `wiki/` | Documentación científica y técnica detallada del proyecto. |
 
 ---
@@ -56,3 +58,4 @@ La arquitectura tripartita de la molécula PROTAC es:
    * El archivo `vhl.pdb` comienza en `Met54` de la isoforma canónica de VHL (`Residuo 1 local = Met54 canónico`). Para convertir a numeración cristalográfica canónica (ej. PDB `4W9H`), se suma **`+53`** (`TYR 45` local = `Tyr98` canónico; `HIS 62` local = `His115` canónico).
 4. **Verificación Obligatoria:**
    * Cualquier cambio en `scripts/` debe verificarse ejecutando `./.venv/bin/python3 scripts/03_analizar_estabilidad.py` desde la raíz del repositorio y comprobando que `Choques estéricos (< 2.5 Å) == 0`.
+   * Tras cambios en el SMILES o el complejo ternario, regenerar el reporte web con `./.venv/bin/python3 scripts/04_viabilidad_laboratorio.py` (0 `fail` en el checklist; el veredicto puede ser `viable_*`).

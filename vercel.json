@@ -1,11 +1,8 @@
 {
-  "buildCommand": "",
-  "installCommand": "",
-  "outputDirectory": "05_visor_3d",
+  "installCommand": "cd web && npm install",
+  "buildCommand": "cd web && npm run build",
+  "outputDirectory": "web/dist",
   "rewrites": [
-    {
-      "source": "/",
-      "destination": "/index.html"
-    }
+    { "source": "/((?!assets/).*)", "destination": "/index.html" }
   ]
 }

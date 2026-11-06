@@ -115,9 +115,15 @@ python3 -m meeko.cli.mk_prepare_ligand -i 01_estructuras_iniciales/protac.sdf -o
 # Paso 4: Ensamblar el Complejo Ternario, optimizar la interfaz PPI y refinar con Vina
 python3 scripts/02_ensamblar_complejo_ternario.py
 
-# Paso 5: Ver reporte de estabilidad en terminal y abrir el Visor 3D en el navegador
+# Paso 5: Ver reporte de estabilidad en terminal
 python3 scripts/03_analizar_estabilidad.py
-open 05_visor_3d/visor_3d_complejo_ternario.html
+
+# Paso 6: Comprobación computacional de viabilidad de laboratorio (+ JSON para la web)
+python3 scripts/04_viabilidad_laboratorio.py
+
+# Portal web React + shadcn (recomendado)
+cd web && npm install && npm run dev
+# → http://localhost:5173
 ```
 
 ---
@@ -133,7 +139,8 @@ protac_cancer_mama/
 ├── scripts/                                   # 🐍 Scripts de Python ordenados por etapa
 │   ├── 01_construir_protac.py                 # Quimioinformática 3D (SMILES -> SDF / PDB / JSON AF3)
 │   ├── 02_ensamblar_complejo_ternario.py      # Acoplamiento PPI, refinamiento Vina y enlaces CONECT
-│   └── 03_analizar_estabilidad.py             # Diagnóstico termodinámico (ΔG, Kd) e interfacial (PPI)
+│   ├── 03_analizar_estabilidad.py             # Diagnóstico termodinámico (ΔG, Kd) e interfacial (PPI)
+│   └── 04_viabilidad_laboratorio.py           # Checklist de viabilidad sintética / laboratorio → JSON web
 │
 ├── 01_estructuras_iniciales/                  # 🧬 Proteínas base y ligando PROTAC inicial
 │   ├── hsp90.pdb                              # Chaperona HSP90-α (Cadena A, UniProt P07900)
@@ -161,8 +168,12 @@ protac_cancer_mama/
 │   ├── protac_en_complejo.pdb / .pdbqt        # Conformación puente final del PROTAC
 │   └── receptor_ternario_hsp90_vhl.pdbqt      # Receptores combinados HSP90 + VHL
 │
-├── 05_visor_3d/                               # 🖥️ Visualización interactiva en navegador
-│   └── visor_3d_complejo_ternario.html        # Visor web 3Dmol.js con superficies PPI y puentes H
+├── web/                                       # 🖥️ Portal React + shadcn (Vercel outputDirectory)
+│   ├── src/pages/                             # Inicio, viabilidad, visor 3D, wiki
+│   ├── src/components/ui/                     # Componentes shadcn
+│   └── public/data/                           # PDB + JSON de viabilidad
+│
+├── 05_visor_3d/                               # Portal HTML legacy (referencia)
 │
 ├── bin/                                       # ⚙️ Motor de simulación
 │   └── vina                                   # Ejecutable AutoDock Vina v1.2.5 (macOS arm64)
@@ -171,9 +182,10 @@ protac_cancer_mama/
 │   ├── 01_fundamentos_biologicos_y_quimicos.md
 │   ├── 02_arquitectura_y_pipeline_computacional.md
 │   ├── 03_analisis_fisicoquimico_y_estabilidad.md
-│   └── 04_guia_visualizacion_3d_y_ejecucion.md
+│   ├── 04_guia_visualizacion_3d_y_ejecucion.md
+│   └── 05_viabilidad_laboratorio.md           # Reporte markdown generado por el script 04
 │
-└── wiki/                                      # 🌐 Wiki del proyecto
+└── wiki/                                      # 🌐 Fuentes Markdown de la wiki
     ├── Home.md
     ├── Glosario-Bioinformatico.md
     ├── Preguntas-Frecuentes-FAQ.md

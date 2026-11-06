@@ -1,0 +1,24 @@
+{
+  "name": "PROTAC HSP90α–VHL",
+  "short_name": "PROTAC HSP90",
+  "description": "Diseño computacional del complejo ternario HSP90α – AUY922–PEG2–VH032 – VHL: viabilidad de laboratorio, visor 3D y wiki.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#eef7f6",
+  "theme_color": "#1f6f68",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

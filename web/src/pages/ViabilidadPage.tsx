@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 
+import { Seo } from "@/components/Seo"
 import { StatusBadge } from "@/components/StatusBadge"
 import {
   Accordion,
@@ -60,6 +61,11 @@ export function ViabilidadPage() {
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
+      <Seo
+        title="Viabilidad de laboratorio"
+        description="Checklist computacional de viabilidad sintética del PROTAC AUY922–PEG2–VH032: SA Score, bloques modulares, alertas y geometría ternaria, con metodología explicada."
+        path="/viabilidad"
+      />
       <section className="animate-rise max-w-3xl">
         <p className="font-mono text-xs tracking-[0.2em] text-primary uppercase">
           Checklist computacional

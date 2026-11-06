@@ -126,6 +126,16 @@ cd web && npm install && npm run dev
 # → http://localhost:5173
 ```
 
+### Despliegue en Vercel
+En el import del proyecto usa exactamente:
+- **Root Directory:** `web`
+- **Framework Preset:** Vite
+- **Build Command:** `npm run build` (default)
+- **Output Directory:** `dist`
+- **Install Command:** `npm install` (default)
+
+Opcional: variable `VITE_SITE_URL=https://tu-proyecto.vercel.app` para canonical/OG.
+
 ---
 
 ## 6. Estructura Organizada del Repositorio

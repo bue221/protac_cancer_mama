@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://protac-cancer-mama.vercel.app/sitemap.xml

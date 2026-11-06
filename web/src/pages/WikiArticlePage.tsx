@@ -1,11 +1,15 @@
 import { Link, useParams } from "react-router-dom"
 
+import { Seo } from "@/components/Seo"
+
 const content: Record<
   string,
-  { title: string; blocks: Array<{ heading: string; body: string }> }
+  { title: string; description: string; blocks: Array<{ heading: string; body: string }> }
 > = {
   glosario: {
     title: "Glosario",
+    description:
+      "Definiciones de PROTAC, warhead, linker, AutoDock Vina, SA Score, PPI y formatos PDB/SDF/PDBQT.",
     blocks: [
       {
         heading: "PROTAC",
@@ -27,6 +31,8 @@ const content: Record<
   },
   faq: {
     title: "Preguntas frecuentes",
+    description:
+      "FAQ sobre scores de Vina, docking secuencial, viabilidad computacional y archivos del complejo ternario.",
     blocks: [
       {
         heading: "¿Vina calcula un Kd real?",
@@ -44,6 +50,8 @@ const content: Record<
   },
   "hoja-de-ruta": {
     title: "Hoja de ruta",
+    description:
+      "Siguientes pasos: AlphaFold 3, HADDOCK, dinámica molecular y validación experimental del PROTAC.",
     blocks: [
       {
         heading: "Ya en el repo",
@@ -78,6 +86,12 @@ export function WikiArticlePage() {
 
   return (
     <article className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
+      <Seo
+        title={article.title}
+        description={article.description}
+        path={`/wiki/${slug}`}
+        type="article"
+      />
       <Link to="/wiki" className="text-sm text-primary hover:underline">
         ← Wiki
       </Link>

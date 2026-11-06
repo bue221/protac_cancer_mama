@@ -2,8 +2,10 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { ArrowRight } from "lucide-react"
 
+import { Seo } from "@/components/Seo"
 import { StatusBadge } from "@/components/StatusBadge"
 import { Button } from "@/components/ui/button"
+import { DEFAULT_DESCRIPTION } from "@/lib/seo"
 import { fetchViabilidad, verdictLabel } from "@/lib/viabilidad"
 import type { ViabilidadReport } from "@/types/viabilidad"
 
@@ -25,6 +27,11 @@ export function HomePage() {
 
   return (
     <div>
+      <Seo
+        title="Diseño computacional del complejo ternario"
+        description={DEFAULT_DESCRIPTION}
+        path="/"
+      />
       <section className="relative min-h-[calc(100vh-3.5rem)] overflow-hidden">
         <div
           aria-hidden

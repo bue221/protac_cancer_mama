@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://web-topaz-eight-18.vercel.app/</loc>
+    <loc>https://protac-cancer-mama.vercel.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://web-topaz-eight-18.vercel.app/resultados</loc>
+    <loc>https://protac-cancer-mama.vercel.app/resultados</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://web-topaz-eight-18.vercel.app/viabilidad</loc>
+    <loc>https://protac-cancer-mama.vercel.app/viabilidad</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://web-topaz-eight-18.vercel.app/visor</loc>
+    <loc>https://protac-cancer-mama.vercel.app/visor</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://web-topaz-eight-18.vercel.app/alphafold</loc>
+    <loc>https://protac-cancer-mama.vercel.app/alphafold</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://web-topaz-eight-18.vercel.app/limitaciones</loc>
+    <loc>https://protac-cancer-mama.vercel.app/limitaciones</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://web-topaz-eight-18.vercel.app/sitemap.xml
+Sitemap: https://protac-cancer-mama.vercel.app/sitemap.xml

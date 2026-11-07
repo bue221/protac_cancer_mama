@@ -9,7 +9,7 @@ Repositorio bioinformático y quimioinformático para el **diseño racional, par
 
 > **Alcance:** piloto computacional. Los scores de AutoDock Vina **no** son Kd experimentales; no hay aún MD ni ensayo celular. Ver portal `/limitaciones` y `LICENSE` (outputs AlphaFold: uso no comercial).
 
-**Portal web:** [https://web-topaz-eight-18.vercel.app](https://web-topaz-eight-18.vercel.app)
+**Portal web:** [https://protac-cancer-mama.vercel.app](https://protac-cancer-mama.vercel.app)
 
 ---
 

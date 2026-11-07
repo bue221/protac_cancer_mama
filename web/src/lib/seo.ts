@@ -1,6 +1,6 @@
 export const SITE_URL =
   (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, "") ||
-  "https://web-topaz-eight-18.vercel.app"
+  "https://protac-cancer-mama.vercel.app"
 
 export const SITE_NAME = "PROTAC · cáncer de mama"
 

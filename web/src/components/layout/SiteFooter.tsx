@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
 
+import { REPO_WIKI_URL } from "@/lib/links"
+
 export function SiteFooter() {
   return (
     <footer className="mt-8 border-t border-border/70">
@@ -35,9 +37,14 @@ export function SiteFooter() {
             <Link to="/limitaciones" className="hover:text-foreground">
               Limitaciones
             </Link>
-            <Link to="/wiki" className="hover:text-foreground">
-              Wiki
-            </Link>
+            <a
+              href={REPO_WIKI_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-foreground"
+            >
+              Wiki (GitHub)
+            </a>
             <p className="mt-2 font-mono text-xs">protac_cancer_mama</p>
             <p className="max-w-xs text-right text-[11px] leading-relaxed">
               Outputs AlphaFold: uso no comercial · ver LICENSE / terms_of_use.md

@@ -6,6 +6,7 @@ import { PosterFigure } from "@/components/PosterFigure"
 import { Seo } from "@/components/Seo"
 import { StatusBadge } from "@/components/StatusBadge"
 import { Button } from "@/components/ui/button"
+import { REPO_WIKI_PAGES, REPO_WIKI_URL } from "@/lib/links"
 import { DEFAULT_DESCRIPTION } from "@/lib/seo"
 import { fetchViabilidad, verdictLabel } from "@/lib/viabilidad"
 import type { ViabilidadReport } from "@/types/viabilidad"
@@ -314,7 +315,9 @@ export function HomePage() {
                 <Link to="/alphafold">AlphaFold PPI</Link>
               </Button>
               <Button asChild variant="outline">
-                <Link to="/wiki/hoja-de-ruta">Hoja de ruta MD</Link>
+                <a href={REPO_WIKI_PAGES.hojaDeRuta} target="_blank" rel="noreferrer">
+                  Hoja de ruta MD
+                </a>
               </Button>
             </div>
           </div>
@@ -385,23 +388,44 @@ export function HomePage() {
               body: "Qué demuestra el modelo y qué no (Vina ≠ Kd, sin MD ni lab).",
             },
             {
-              to: "/wiki",
+              to: REPO_WIKI_URL,
               title: "Wiki técnica",
-              body: "Glosario, FAQ y hoja de ruta hacia HADDOCK, AF3 local y MD.",
+              body: "Documentación completa en GitHub: fundamentos, pipeline, FAQ y hoja de ruta.",
+              external: true,
             },
-          ].map((item, i) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="group border border-border bg-card/60 p-5 transition-colors hover:border-primary/40 hover:bg-card"
-              style={{ animationDelay: `${i * 60}ms` }}
-            >
-              <h3 className="font-heading text-lg font-semibold group-hover:text-primary">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
-            </Link>
-          ))}
+          ].map((item, i) => {
+            const className =
+              "group border border-border bg-card/60 p-5 transition-colors hover:border-primary/40 hover:bg-card"
+            const inner = (
+              <>
+                <h3 className="font-heading text-lg font-semibold group-hover:text-primary">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+              </>
+            )
+            return "external" in item && item.external ? (
+              <a
+                key={item.to}
+                href={item.to}
+                target="_blank"
+                rel="noreferrer"
+                className={className}
+                style={{ animationDelay: `${i * 60}ms` }}
+              >
+                {inner}
+              </a>
+            ) : (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={className}
+                style={{ animationDelay: `${i * 60}ms` }}
+              >
+                {inner}
+              </Link>
+            )
+          })}
         </div>
       </section>
     </div>

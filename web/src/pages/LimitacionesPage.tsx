@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 
 import { Seo } from "@/components/Seo"
+import { REPO_WIKI_PAGES } from "@/lib/links"
 
 const BLOCKS = [
   {
@@ -66,9 +67,14 @@ export function LimitacionesPage() {
           AlphaFold PPI
         </Link>{" "}
         y{" "}
-        <Link to="/wiki/hoja-de-ruta" className="text-primary hover:underline">
+        <a
+          href={REPO_WIKI_PAGES.hojaDeRuta}
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary hover:underline"
+        >
           hoja de ruta
-        </Link>
+        </a>
         .
       </p>
     </div>

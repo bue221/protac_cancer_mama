@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom"
-import { Menu } from "lucide-react"
+import { ExternalLink, Menu } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -9,39 +9,56 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { REPO_WIKI_URL } from "@/lib/links"
 import { cn } from "@/lib/utils"
 
-const links = [
-  { to: "/", label: "Inicio" },
-  { to: "/resultados", label: "Resultados" },
-  { to: "/viabilidad", label: "Viabilidad" },
-  { to: "/visor", label: "Visor 3D" },
-  { to: "/alphafold", label: "AlphaFold" },
-  { to: "/limitaciones", label: "Limitaciones" },
-  { to: "/wiki", label: "Wiki" },
+const links: Array<
+  | { kind: "route"; to: string; label: string; end?: boolean }
+  | { kind: "external"; href: string; label: string }
+> = [
+  { kind: "route", to: "/", label: "Inicio", end: true },
+  { kind: "route", to: "/resultados", label: "Resultados" },
+  { kind: "route", to: "/viabilidad", label: "Viabilidad" },
+  { kind: "route", to: "/visor", label: "Visor 3D" },
+  { kind: "route", to: "/alphafold", label: "AlphaFold" },
+  { kind: "route", to: "/limitaciones", label: "Limitaciones" },
+  { kind: "external", href: REPO_WIKI_URL, label: "Wiki" },
 ]
+
+const navClass = (active: boolean) =>
+  cn(
+    "inline-flex items-center gap-1 text-sm tracking-wide transition-colors",
+    active ? "text-primary font-semibold" : "text-muted-foreground hover:text-foreground",
+  )
 
 function NavItems({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <>
-      {links.map((link) => (
-        <NavLink
-          key={link.to}
-          to={link.to}
-          end={link.to === "/"}
-          onClick={onNavigate}
-          className={({ isActive }) =>
-            cn(
-              "text-sm tracking-wide transition-colors",
-              isActive
-                ? "text-primary font-semibold"
-                : "text-muted-foreground hover:text-foreground",
-            )
-          }
-        >
-          {link.label}
-        </NavLink>
-      ))}
+      {links.map((link) =>
+        link.kind === "external" ? (
+          <a
+            key={link.href}
+            href={link.href}
+            target="_blank"
+            rel="noreferrer"
+            onClick={onNavigate}
+            className={navClass(false)}
+          >
+            {link.label}
+            <ExternalLink className="size-3 opacity-60" aria-hidden />
+          </a>
+        ) : (
+          <NavLink
+            key={link.to}
+            to={link.to}
+            end={link.end}
+            onClick={onNavigate}
+            className={({ isActive }) => navClass(isActive)}
+          >
+            {link.label}
+          </NavLink>
+        ),
+      )}
     </>
   )
 }

@@ -7,8 +7,7 @@ import { HomePage } from "@/pages/HomePage"
 import { LimitacionesPage } from "@/pages/LimitacionesPage"
 import { ResultadosPage } from "@/pages/ResultadosPage"
 import { ViabilidadPage } from "@/pages/ViabilidadPage"
-import { WikiArticlePage } from "@/pages/WikiArticlePage"
-import { WikiPage } from "@/pages/WikiPage"
+import { WikiRedirectPage } from "@/pages/WikiRedirectPage"
 
 const VisorPage = lazy(async () => {
   const mod = await import("@/pages/VisorPage")
@@ -40,8 +39,7 @@ export default function App() {
               <Route path="/visor" element={<VisorPage />} />
               <Route path="/alphafold" element={<AlphaFoldPage />} />
               <Route path="/limitaciones" element={<LimitacionesPage />} />
-              <Route path="/wiki" element={<WikiPage />} />
-              <Route path="/wiki/:slug" element={<WikiArticlePage />} />
+              <Route path="/wiki/*" element={<WikiRedirectPage />} />
             </Routes>
           </Suspense>
         </main>

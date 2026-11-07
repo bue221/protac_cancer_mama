@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 type SurfaceMode = "ppi" | "full" | "off"
+type StyleMode = "hybrid" | "sticks" | "cartoon"
 
 const HSP_POCKET_PPI = [
   51, 55, 58, 93, 97, 98, 99, 100, 101, 102, 104, 105, 106, 107, 137, 138, 150, 156,
@@ -88,28 +89,13 @@ const LEGEND = [
   { color: "#fde047", title: "Puentes H", detail: "Cilindros amarillos discontinuos" },
 ]
 
-function applyBridgeStyles(viewer: $3Dmol.Viewer, showLabels: boolean) {
-  viewer.removeAllLabels()
-  viewer.removeAllShapes()
+const STYLE_LABEL: Record<StyleMode, string> = {
+  hybrid: "híbrido",
+  sticks: "sticks",
+  cartoon: "cartoon",
+}
 
-  viewer.setStyle(
-    { chain: "A" },
-    { cartoon: { color: "#38bdf8", opacity: 0.72, thickness: 0.2 } },
-  )
-  viewer.setStyle(
-    { chain: "B" },
-    { cartoon: { color: "#f472b6", opacity: 0.72, thickness: 0.2 } },
-  )
-
-  viewer.addStyle(
-    { chain: "A", resi: HSP_POCKET_PPI },
-    { stick: { radius: 0.14, colorscheme: "cyanCarbon" } },
-  )
-  viewer.addStyle(
-    { chain: "B", resi: VHL_POCKET_PPI },
-    { stick: { radius: 0.14, colorscheme: "magentaCarbon" } },
-  )
-
+function applyLigandStyles(viewer: $3Dmol.Viewer) {
   viewer.setStyle(
     { chain: "C", resn: "AUY" },
     {
@@ -132,6 +118,58 @@ function applyBridgeStyles(viewer: $3Dmol.Viewer, showLabels: boolean) {
     },
   )
   viewer.setStyle({ chain: "C", elem: "H" }, { stick: { radius: 0.08, color: "#cbd5e1" } })
+}
+
+function applyBridgeStyles(
+  viewer: $3Dmol.Viewer,
+  showLabels: boolean,
+  styleMode: StyleMode,
+) {
+  viewer.removeAllLabels()
+  viewer.removeAllShapes()
+
+  if (styleMode === "sticks") {
+    // Estilo unificado: todo en sticks (proteínas + PROTAC)
+    viewer.setStyle(
+      { chain: "A" },
+      { stick: { radius: 0.12, colorscheme: "cyanCarbon" } },
+    )
+    viewer.setStyle(
+      { chain: "B" },
+      { stick: { radius: 0.12, colorscheme: "magentaCarbon" } },
+    )
+    applyLigandStyles(viewer)
+  } else if (styleMode === "cartoon") {
+    // Unificado “forma”: proteínas en cartoon; PROTAC sigue en sticks (no tiene cinta)
+    viewer.setStyle(
+      { chain: "A" },
+      { cartoon: { color: "#38bdf8", opacity: 0.92, thickness: 0.3 } },
+    )
+    viewer.setStyle(
+      { chain: "B" },
+      { cartoon: { color: "#f472b6", opacity: 0.92, thickness: 0.3 } },
+    )
+    applyLigandStyles(viewer)
+  } else {
+    // Híbrido (default científico): cartoon + sticks de bolsillo/PPI + PROTAC
+    viewer.setStyle(
+      { chain: "A" },
+      { cartoon: { color: "#38bdf8", opacity: 0.72, thickness: 0.2 } },
+    )
+    viewer.setStyle(
+      { chain: "B" },
+      { cartoon: { color: "#f472b6", opacity: 0.72, thickness: 0.2 } },
+    )
+    viewer.addStyle(
+      { chain: "A", resi: HSP_POCKET_PPI },
+      { stick: { radius: 0.14, colorscheme: "cyanCarbon" } },
+    )
+    viewer.addStyle(
+      { chain: "B", resi: VHL_POCKET_PPI },
+      { stick: { radius: 0.14, colorscheme: "magentaCarbon" } },
+    )
+    applyLigandStyles(viewer)
+  }
 
   if (showLabels) {
     for (const label of SCENE_LABELS) {
@@ -212,6 +250,7 @@ export function MolViewer({ className }: { className?: string }) {
   const [ready, setReady] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [surface, setSurface] = useState<SurfaceMode>("ppi")
+  const [styleMode, setStyleMode] = useState<StyleMode>("hybrid")
   const [showLabels, setShowLabels] = useState(true)
   const [showLegend, setShowLegend] = useState(true)
 
@@ -235,7 +274,7 @@ export function MolViewer({ className }: { className?: string }) {
 
         viewer.clear()
         viewer.addModel(pdb, "pdb", { keepH: true })
-        applyBridgeStyles(viewer, true)
+        applyBridgeStyles(viewer, true, "hybrid")
         await applySurfaces(viewer, "ppi")
         viewer.zoomTo({ chain: "C" }, 1)
         viewer.zoom(0.92, 1)
@@ -258,21 +297,19 @@ export function MolViewer({ className }: { className?: string }) {
   useEffect(() => {
     const viewer = viewerRef.current
     if (!viewer || !ready) return
-    void applySurfaces(viewer, surface)
-  }, [surface, ready])
-
-  useEffect(() => {
-    const viewer = viewerRef.current
-    if (!viewer || !ready) return
-    applyBridgeStyles(viewer, showLabels)
+    applyBridgeStyles(viewer, showLabels, styleMode)
     void applySurfaces(viewer, surface).then(() => viewer.render())
-  }, [showLabels, ready]) // eslint-disable-line react-hooks/exhaustive-deps -- surface handled separately
+  }, [showLabels, styleMode, surface, ready])
 
   function zoom(sel: object) {
     const viewer = viewerRef.current
     if (!viewer) return
     viewer.zoomTo(sel, 500)
     viewer.render()
+  }
+
+  function cycleStyle() {
+    setStyleMode((s) => (s === "hybrid" ? "sticks" : s === "sticks" ? "cartoon" : "hybrid"))
   }
 
   return (
@@ -313,6 +350,14 @@ export function MolViewer({ className }: { className?: string }) {
           size="sm"
           variant="outline"
           className="bg-background/85"
+          onClick={cycleStyle}
+        >
+          Estilo: {STYLE_LABEL[styleMode]}
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          className="bg-background/85"
           onClick={() =>
             setSurface((s) => (s === "ppi" ? "full" : s === "full" ? "off" : "ppi"))
           }
@@ -338,9 +383,15 @@ export function MolViewer({ className }: { className?: string }) {
       </div>
 
       {showLegend && (
-        <aside className="absolute bottom-3 left-3 z-10 w-[min(100%-1.5rem,280px)] border border-white/10 bg-[#0f172a]/92 p-3 text-white shadow-lg backdrop-blur-md">
+        <aside className="absolute bottom-3 left-3 z-10 w-[min(100%-1.5rem,300px)] border border-white/10 bg-[#0f172a]/92 p-3 text-white shadow-lg backdrop-blur-md">
           <p className="font-mono text-[10px] tracking-[0.18em] text-sky-300/90 uppercase">
             Leyenda del complejo
+          </p>
+          <p className="mt-1 text-[11px] text-slate-400">
+            Estilo actual: <span className="text-sky-200">{STYLE_LABEL[styleMode]}</span>
+            {styleMode === "hybrid" && " (cartoon + sticks de bolsillo)"}
+            {styleMode === "sticks" && " (todo unificado en sticks)"}
+            {styleMode === "cartoon" && " (proteínas cartoon; PROTAC en sticks)"}
           </p>
           <ul className="mt-2 space-y-2">
             {LEGEND.map((item) => (

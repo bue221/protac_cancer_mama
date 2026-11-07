@@ -2,10 +2,10 @@ export const SITE_URL =
   (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, "") ||
   "https://protac-cancer-mama.vercel.app"
 
-export const SITE_NAME = "PROTAC HSP90α–VHL"
+export const SITE_NAME = "PROTAC · cáncer de mama"
 
 export const DEFAULT_DESCRIPTION =
-  "Diseño computacional del complejo ternario HSP90α – AUY922–PEG2–VH032 – VHL: viabilidad de laboratorio, visor 3D interactivo y wiki técnica."
+  "Diseño de un PROTAC como alternativa al tratamiento del cáncer de mama: por qué atacar HSP90/HSP70, mecanismo VHL, docking, viabilidad de laboratorio y visor 3D del complejo ternario."
 
 export type PageSeo = {
   title: string
@@ -46,7 +46,7 @@ export function applyPageSeo(seo: PageSeo) {
     ? seo.title
     : `${seo.title} · ${SITE_NAME}`
   const url = `${SITE_URL}${seo.path}`
-  const image = seo.image ?? `${SITE_URL}/og-image.jpg`
+  const image = seo.image ?? `${SITE_URL}/poster/mecanismo-protac.png`
 
   document.title = title
   upsertMeta("name", "description", seo.description)

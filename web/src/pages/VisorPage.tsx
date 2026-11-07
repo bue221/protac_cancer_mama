@@ -10,13 +10,16 @@ export function VisorPage() {
         path="/visor"
       />
       <section className="mb-6 max-w-3xl">
-        <p className="font-mono text-xs tracking-[0.2em] text-primary uppercase">Estructura 3D</p>
+        <p className="font-mono text-xs tracking-[0.2em] text-primary uppercase">
+          Resultado · complejo HSP–PROTAC–VHL
+        </p>
         <h1 className="font-heading mt-3 text-4xl font-semibold tracking-tight text-ink">
           Complejo ternario
         </h1>
         <p className="mt-3 text-muted-foreground">
-          Tags en la escena para HSP90, VHL y los módulos [AUY] / [LNK] / [VHL], más leyenda
-          lateral y sticks de bolsillo/PPI.
+          El ensamble que el póster describe como paso clave: HSP90-α, el puente PEG y VHL en la
+          misma escena. Usa <b>Estilo</b>, tags, leyenda y superficies PPI para inspeccionar Asp93
+          y el reclutamiento de VHL.
         </p>
       </section>
 

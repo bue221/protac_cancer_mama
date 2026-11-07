@@ -51,19 +51,19 @@ const content: Record<
   "hoja-de-ruta": {
     title: "Hoja de ruta",
     description:
-      "Siguientes pasos: AlphaFold 3, HADDOCK, dinámica molecular y validación experimental del PROTAC.",
+      "Siguientes pasos del póster RedColsi: AlphaFold 3, HADDOCK, dinámica molecular (GROMACS), ADMET y validación experimental.",
     blocks: [
       {
         heading: "Ya en el repo",
-        body: "Construcción RDKit, docking Vina, ensamblaje PPI y checklist de viabilidad de laboratorio.",
+        body: "Construcción RDKit del piloto AUY922–PEG2–VH032, docking Vina, ensamblaje PPI y checklist de viabilidad de laboratorio.",
       },
       {
-        heading: "Siguiente cómputo",
-        body: "AlphaFold 3, HADDOCK semiflexible y MD 50–100 ns con MM/GBSA.",
+        heading: "Siguiente cómputo (póster)",
+        body: "Explorar longitudes PEG3–PEG5, AlphaFold 3, HADDOCK semiflexible, MD 50–100 ns (GROMACS/OpenMM) y predicción ADMET/toxicidad.",
       },
       {
         heading: "Siguiente laboratorio",
-        body: "Síntesis convergente por amidas, LC-MS/NMR y Western blot de degradación de HSP90.",
+        body: "Síntesis convergente por amidas, LC-MS/NMR y Western blot de degradación de HSP90 (y, si aplica, HSP70).",
       },
     ],
   },

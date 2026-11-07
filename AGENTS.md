@@ -37,7 +37,7 @@ La arquitectura tripartita de la molécula PROTAC es:
 | `scripts/02_ensamblar_complejo_ternario.py` | **Paso 2:** Fusiona las poses de Docking 1 y 2, optimiza las torsiones del linker PEG2 para maximizar la interfaz Proteína–Proteína (PPI) sin choques estéricos (`< 2.5 Å`), ejecuta `./bin/vina --local_only` y reconstruye los PDB con conectividades RDKit (`CONECT`) en `04_complejo_ternario_final/`. |
 | `scripts/03_analizar_estabilidad.py` | **Paso 3:** Calcula $\Delta G$, $K_d$, energía intermolecular, choques estéricos, contactos PPI y extensión del puente PEG2. |
 | `scripts/04_viabilidad_laboratorio.py` | **Paso 4:** Checklist de viabilidad de laboratorio (SA Score, bloques modulares, alertas PAINS/Brenk, estereoquímica, choques PPI) → `05_visor_3d/data/viabilidad_laboratorio.json`. |
-| `01_estructuras_iniciales/` | Contiene `hsp90.pdb`, `vhl.pdb`, `protac.pdb`, `protac.sdf` y `alphafold3_input.json`. |
+| `01_estructuras_iniciales/` | Contiene `hsp90.pdb`, `vhl.pdb`, `protac.pdb`, `protac.sdf`, `alphafold_server_hsp90_vhl.json` (upload web), `alphafold3_input.json` (mismo formato Server) y `alphafold3_local_input.json` (AF3 local + SMILES PROTAC). |
 | `02_preparacion_pdbqt/` | Contiene `receptor_hsp90.pdbqt`, `receptor_vhl.pdbqt` y `ligando_protac.pdbqt` generados con Meeko 0.8.0. |
 | `03_docking_secuencial/` | Contiene `config_docking1_hsp90.txt`, `resultado_docking1_hsp90.pdbqt`, `mejor_pose_hsp90.pdb/.pdbqt`, `macromodelo_hsp90_protac.pdb/.pdbqt`, `config_docking2_vhl.txt` y `resultado_docking2_vhl.pdbqt`. |
 | `04_complejo_ternario_final/` | Contiene `complejo_ternario_limpio.pdb` (dominios catalíticos plegados + `CONECT`), `complejo_ternario_completo.pdb`, `protac_en_complejo.pdb/.pdbqt` y `receptor_ternario_hsp90_vhl.pdbqt`. |

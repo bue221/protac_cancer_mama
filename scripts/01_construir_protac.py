@@ -218,7 +218,10 @@ def exportar_archivos(mol: Chem.Mol, conf_id: int) -> None:
 
     pdb_filename = "01_estructuras_iniciales/protac.pdb"
     sdf_filename = "01_estructuras_iniciales/protac.sdf"
-    af3_json_filename = "01_estructuras_iniciales/alphafold3_input.json"
+    # Local AF3 (código abierto): acepta SMILES custom del PROTAC
+    af3_local_json = "01_estructuras_iniciales/alphafold3_local_input.json"
+    # AlphaFold Server (web): exige ARRAY de jobs + proteinChain; NO acepta SMILES custom
+    af_server_json = "01_estructuras_iniciales/alphafold_server_hsp90_vhl.json"
 
     # Guardar PDB del confórmero extendido de mínima energía
     Chem.MolToPDBFile(mol, pdb_filename, confId=conf_id)
@@ -228,8 +231,20 @@ def exportar_archivos(mol: Chem.Mol, conf_id: int) -> None:
     writer.write(mol, confId=conf_id)
     writer.close()
 
-    # Guardar JSON de entrada para AlphaFold 3 (complejo ternario Hsp90α + VHL + PROTAC)
-    af3_payload = {
+    hsp90_ntd = (
+        "DQPMEEEEVETFAFQAEIAQLMSLIINTFYSNKEIFLRELISNSSDALDKIRYESLTDPSKLDSGKELHINL"
+        "IPNKQDRTLTIVDTGIGMTKADLINNLGTIAKSGTKAFMEALQAGADISMIGQFGVGFYSAYLVAEKVTVIT"
+        "KHNDDEQYAWESSAGGSFTVRTDTGEPMGRGTKVILHLKEDQTEYLEERRIKEIVKKHSQFIGYPITLFVEK"
+        "ERDKEVSDDEAE"
+    )
+    vhl_domain = (
+        "MEAGRPRPVLRSVNSREPSQVIFCNRSPRVVLPVWLNFDGEPQPYPTLPPGTGRRIHSYRGHLWLFRDAGTH"
+        "DGLLVNQTELFVPSLNVDGQPIFANITLPVYTLKERCLQVVRSLVKPENYRRLDIVRSLYEDLEDHPNVQKD"
+        "LERLTQERIAHQRMGD"
+    )
+
+    # Formato local AlphaFold 3 (dialect alphafold3 + SMILES del PROTAC)
+    af3_local_payload = {
         "name": "Complejo_Ternario_Hsp90_PROTAC_AUY922_VHL",
         "modelSeeds": [42],
         "sequences": [
@@ -237,23 +252,14 @@ def exportar_archivos(mol: Chem.Mol, conf_id: int) -> None:
                 "protein": {
                     "id": "A",
                     "description": "Hsp90-alpha N-terminal domain (UniProt P07900, residuos 9-236)",
-                    "sequence": (
-                        "DQPMEEEEVETFAFQAEIAQLMSLIINTFYSNKEIFLRELISNSSDALDKIRYESLTDPSKLDSGKELHINL"
-                        "IPNKQDRTLTIVDTGIGMTKADLINNLGTIAKSGTKAFMEALQAGADISMIGQFGVGFYSAYLVAEKVTVIT"
-                        "KHNDDEQYAWESSAGGSFTVRTDTGEPMGRGTKVILHLKEDQTEYLEERRIKEIVKKHSQFIGYPITLFVEK"
-                        "ERDKEVSDDEAE"
-                    ),
+                    "sequence": hsp90_ntd,
                 }
             },
             {
                 "protein": {
                     "id": "B",
                     "description": "Von Hippel-Lindau (VHL) E3 ligase domain (UniProt P40337, residuos 54-213)",
-                    "sequence": (
-                        "MEAGRPRPVLRSVNSREPSQVIFCNRSPRVVLPVWLNFDGEPQPYPTLPPGTGRRIHSYRGHLWLFRDAGTH"
-                        "DGLLVNQTELFVPSLNVDGQPIFANITLPVYTLKERCLQVVRSLVKPENYRRLDIVRSLYEDLEDHPNVQKD"
-                        "LERLTQERIAHQRMGD"
-                    ),
+                    "sequence": vhl_domain,
                 }
             },
             {
@@ -266,12 +272,48 @@ def exportar_archivos(mol: Chem.Mol, conf_id: int) -> None:
         "dialect": "alphafold3",
         "version": 1,
     }
-    with open(af3_json_filename, "w", encoding="utf-8") as f:
-        json.dump(af3_payload, f, indent=2, ensure_ascii=False)
+    with open(af3_local_json, "w", encoding="utf-8") as f:
+        json.dump(af3_local_payload, f, indent=2, ensure_ascii=False)
+
+    # Formato AlphaFold Server (DEBE ser una lista; proteinChain + count; sin SMILES custom)
+    af_server_payload = [
+        {
+            "name": "HSP90_NTD_VHL_PPI_sin_PROTAC",
+            "modelSeeds": [],
+            "sequences": [
+                {
+                    "proteinChain": {
+                        "sequence": hsp90_ntd,
+                        "count": 1,
+                    }
+                },
+                {
+                    "proteinChain": {
+                        "sequence": vhl_domain,
+                        "count": 1,
+                    }
+                },
+            ],
+            "dialect": "alphafoldserver",
+            "version": 1,
+        }
+    ]
+    with open(af_server_json, "w", encoding="utf-8") as f:
+        json.dump(af_server_payload, f, indent=2, ensure_ascii=False)
+
+    # Compatibilidad: el nombre antiguo ahora apunta al JSON del Server (upload web)
+    legacy_name = "01_estructuras_iniciales/alphafold3_input.json"
+    with open(legacy_name, "w", encoding="utf-8") as f:
+        json.dump(af_server_payload, f, indent=2, ensure_ascii=False)
 
     print(f"   ✓ Archivo PDB guardado como  : {pdb_filename} (extendido y ordenado: AUY -> LNK -> VHL)")
     print(f"   ✓ Archivo SDF guardado como  : {sdf_filename} (conserva enlaces dobles/aromáticos)")
-    print(f"   ✓ Archivo JSON guardado como : {af3_json_filename} (formato oficial AlphaFold 3)")
+    print(f"   ✓ AF Server (subir aquí)     : {af_server_json}")
+    print(f"   ✓ AF3 local (+ SMILES PROTAC): {af3_local_json}")
+    print(
+        "   ⚠ AlphaFold Server NO acepta SMILES custom del PROTAC; "
+        "el JSON del Server predice solo HSP90+VHL (PPI)."
+    )
 
 
 def generar_modelo_3d() -> None:

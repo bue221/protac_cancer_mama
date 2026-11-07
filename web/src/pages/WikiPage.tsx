@@ -18,6 +18,11 @@ const articles = [
     title: "Hoja de ruta",
     summary: "HADDOCK, AlphaFold 3, dinámica molecular y siguiente paso experimental.",
   },
+  {
+    slug: "alphafold-ppi",
+    title: "AlphaFold PPI sin PROTAC",
+    summary: "ipTM 0.52: interfaz HSP90–VHL incierta sin el ligando puente.",
+  },
 ]
 
 export function WikiPage() {
@@ -48,6 +53,33 @@ export function WikiPage() {
             <p className="mt-1 text-sm text-muted-foreground">{article.summary}</p>
           </Link>
         ))}
+        <Link
+          to="/resultados"
+          className="border border-border bg-card/60 px-5 py-4 transition-colors hover:border-primary/40 hover:bg-card"
+        >
+          <h2 className="font-heading text-xl font-semibold">Resultados y descargas</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Tabla Vina/PPI y PDB/JSON para anexos.
+          </p>
+        </Link>
+        <Link
+          to="/alphafold"
+          className="border border-border bg-card/60 px-5 py-4 transition-colors hover:border-primary/40 hover:bg-card"
+        >
+          <h2 className="font-heading text-xl font-semibold">AlphaFold · evidencia PPI</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Scores archivados y modelo 0 sin PROTAC (ipTM 0.52).
+          </p>
+        </Link>
+        <Link
+          to="/limitaciones"
+          className="border border-border bg-card/60 px-5 py-4 transition-colors hover:border-primary/40 hover:bg-card"
+        >
+          <h2 className="font-heading text-xl font-semibold">Limitaciones</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Alcance del piloto: qué sí y qué no demuestra.
+          </p>
+        </Link>
         <Link
           to="/viabilidad"
           className="border border-border bg-card/60 px-5 py-4 transition-colors hover:border-primary/40 hover:bg-card"

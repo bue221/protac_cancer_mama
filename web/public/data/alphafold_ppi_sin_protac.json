@@ -1,0 +1,145 @@
+{
+  "job_name": "HSP90_NTD_VHL_PPI_sin_PROTAC",
+  "source": "AlphaFold Server",
+  "job_url_ephemeral": "https://alphafoldserver.com/fold/397856302ca8d1c",
+  "job_url_note": "URL de historial; puede requerir cuenta y no es permanente. Usar este archivo archivado como evidencia.",
+  "dialect": "alphafoldserver",
+  "includes_protac": false,
+  "why_no_protac": "AlphaFold Server solo admite ligandos CCD de una lista fija (~19). El PROTAC AUY922–PEG2–VH032 no está en esa lista; SMILES custom requiere AF3 local.",
+  "chains": [
+    {
+      "id": "A",
+      "label": "HSP90-α NTD",
+      "uniprot": "P07900",
+      "residues": "9–236 (constructo del job)",
+      "length": 228
+    },
+    {
+      "id": "B",
+      "label": "VHL",
+      "uniprot": "P40337",
+      "residues": "54–213 (constructo del job)",
+      "length": 160
+    }
+  ],
+  "interpretation": {
+    "veredicto": "interfaz_incierta",
+    "resumen_es": "Sin el PROTAC, AlphaFold pliega bien cada dominio (chain pTM ~0.74 / ~0.84) pero la interfaz HSP90–VHL queda en zona frontera (ipTM 0.52 en el modelo rank 0; PAE mín. intercadena ~4.2 Å). No demuestra PPI espontánea fuerte; refuerza que el puente ligando es necesario en el diseño ternario.",
+    "umbrales": {
+      "iptm_alto": ">0.8 suele asociarse a interfaces confiables",
+      "iptm_frontera": "0.5–0.6: orientación relativa incierta",
+      "iptm_bajo": "<0.5: interfaz poco confiable"
+    }
+  },
+  "best_model": {
+    "rank": 0,
+    "iptm": 0.52,
+    "ptm": 0.53,
+    "ranking_score": 0.57,
+    "has_clash": 0.0,
+    "fraction_disordered": 0.1,
+    "chain_ptm": {
+      "A_HSP90_NTD": 0.74,
+      "B_VHL": 0.84
+    },
+    "chain_pair_pae_min_A_B": 4.16,
+    "files": {
+      "cif": "models/model_0.cif",
+      "summary": "confidences/summary_0.json"
+    }
+  },
+  "models": [
+    {
+      "rank": 0,
+      "iptm": 0.52,
+      "ptm": 0.53,
+      "ranking_score": 0.57,
+      "has_clash": 0.0,
+      "fraction_disordered": 0.1,
+      "chain_ptm": {
+        "A_HSP90_NTD": 0.74,
+        "B_VHL": 0.84
+      },
+      "chain_pair_pae_min_A_B": 4.16,
+      "files": {
+        "cif": "models/model_0.cif",
+        "summary": "confidences/summary_0.json"
+      }
+    },
+    {
+      "rank": 1,
+      "iptm": 0.51,
+      "ptm": 0.53,
+      "ranking_score": 0.56,
+      "has_clash": 0.0,
+      "fraction_disordered": 0.1,
+      "chain_ptm": {
+        "A_HSP90_NTD": 0.73,
+        "B_VHL": 0.84
+      },
+      "chain_pair_pae_min_A_B": 4.05,
+      "files": {
+        "cif": "models/model_1.cif",
+        "summary": "confidences/summary_1.json"
+      }
+    },
+    {
+      "rank": 2,
+      "iptm": 0.48,
+      "ptm": 0.53,
+      "ranking_score": 0.54,
+      "has_clash": 0.0,
+      "fraction_disordered": 0.09,
+      "chain_ptm": {
+        "A_HSP90_NTD": 0.73,
+        "B_VHL": 0.84
+      },
+      "chain_pair_pae_min_A_B": 4.39,
+      "files": {
+        "cif": "models/model_2.cif",
+        "summary": "confidences/summary_2.json"
+      }
+    },
+    {
+      "rank": 3,
+      "iptm": 0.44,
+      "ptm": 0.53,
+      "ranking_score": 0.5,
+      "has_clash": 0.0,
+      "fraction_disordered": 0.09,
+      "chain_ptm": {
+        "A_HSP90_NTD": 0.73,
+        "B_VHL": 0.84
+      },
+      "chain_pair_pae_min_A_B": 5.08,
+      "files": {
+        "cif": "models/model_3.cif",
+        "summary": "confidences/summary_3.json"
+      }
+    },
+    {
+      "rank": 4,
+      "iptm": 0.41,
+      "ptm": 0.53,
+      "ranking_score": 0.48,
+      "has_clash": 0.0,
+      "fraction_disordered": 0.09,
+      "chain_ptm": {
+        "A_HSP90_NTD": 0.73,
+        "B_VHL": 0.83
+      },
+      "chain_pair_pae_min_A_B": 6.24,
+      "files": {
+        "cif": "models/model_4.cif",
+        "summary": "confidences/summary_4.json"
+      }
+    }
+  ],
+  "terms": "Uso no comercial; ver terms_of_use.md (AlphaFold Server Output Terms of Use). No usar Output para docking/screening automatizado ni para entrenar modelos de predicción estructural.",
+  "citation": "Abramson J et al. Accurate structure prediction of biomolecular interactions with AlphaFold 3. Nature (2024).",
+  "omitted_from_repo": [
+    "full_data_*.json (~1.3 MB × 5, PAE/pLDDT densos)",
+    "msas/ (~23 MB)",
+    "templates/ (~1.2 MB)"
+  ]
+}

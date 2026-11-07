@@ -20,16 +20,28 @@ export function SiteFooter() {
             </p>
           </div>
           <div className="flex flex-col gap-2 sm:items-end">
+            <Link to="/resultados" className="hover:text-foreground">
+              Resultados
+            </Link>
             <Link to="/viabilidad" className="hover:text-foreground">
               Viabilidad
             </Link>
             <Link to="/visor" className="hover:text-foreground">
               Visor 3D
             </Link>
+            <Link to="/alphafold" className="hover:text-foreground">
+              AlphaFold PPI
+            </Link>
+            <Link to="/limitaciones" className="hover:text-foreground">
+              Limitaciones
+            </Link>
             <Link to="/wiki" className="hover:text-foreground">
               Wiki
             </Link>
             <p className="mt-2 font-mono text-xs">protac_cancer_mama</p>
+            <p className="max-w-xs text-right text-[11px] leading-relaxed">
+              Outputs AlphaFold: uso no comercial · ver LICENSE / terms_of_use.md
+            </p>
           </div>
         </div>
       </div>

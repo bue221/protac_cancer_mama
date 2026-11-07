@@ -13,8 +13,11 @@ import { cn } from "@/lib/utils"
 
 const links = [
   { to: "/", label: "Inicio" },
+  { to: "/resultados", label: "Resultados" },
   { to: "/viabilidad", label: "Viabilidad" },
   { to: "/visor", label: "Visor 3D" },
+  { to: "/alphafold", label: "AlphaFold" },
+  { to: "/limitaciones", label: "Limitaciones" },
   { to: "/wiki", label: "Wiki" },
 ]
 

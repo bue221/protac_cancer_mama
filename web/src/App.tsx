@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { SiteFooter } from "@/components/layout/SiteFooter"
 import { SiteHeader } from "@/components/layout/SiteHeader"
 import { HomePage } from "@/pages/HomePage"
+import { LimitacionesPage } from "@/pages/LimitacionesPage"
+import { ResultadosPage } from "@/pages/ResultadosPage"
 import { ViabilidadPage } from "@/pages/ViabilidadPage"
 import { WikiArticlePage } from "@/pages/WikiArticlePage"
 import { WikiPage } from "@/pages/WikiPage"
@@ -11,6 +13,11 @@ import { WikiPage } from "@/pages/WikiPage"
 const VisorPage = lazy(async () => {
   const mod = await import("@/pages/VisorPage")
   return { default: mod.VisorPage }
+})
+
+const AlphaFoldPage = lazy(async () => {
+  const mod = await import("@/pages/AlphaFoldPage")
+  return { default: mod.AlphaFoldPage }
 })
 
 export default function App() {
@@ -28,8 +35,11 @@ export default function App() {
           >
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/resultados" element={<ResultadosPage />} />
               <Route path="/viabilidad" element={<ViabilidadPage />} />
               <Route path="/visor" element={<VisorPage />} />
+              <Route path="/alphafold" element={<AlphaFoldPage />} />
+              <Route path="/limitaciones" element={<LimitacionesPage />} />
               <Route path="/wiki" element={<WikiPage />} />
               <Route path="/wiki/:slug" element={<WikiArticlePage />} />
             </Routes>

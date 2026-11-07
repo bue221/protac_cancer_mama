@@ -46,6 +46,10 @@ const content: Record<
         heading: "¿Viabilidad computacional = síntesis garantizada?",
         body: "No. Indica que la molécula es modularmente razonable. Un químico aún define protectores y purificación.",
       },
+      {
+        heading: "¿AlphaFold Server incluye el PROTAC?",
+        body: "No. Solo ligandos CCD de una lista fija. El job archivado predice HSP90+VHL sin ligando (ipTM 0.52). Para SMILES custom hace falta AF3 local.",
+      },
     ],
   },
   "hoja-de-ruta": {
@@ -55,15 +59,34 @@ const content: Record<
     blocks: [
       {
         heading: "Ya en el repo",
-        body: "Construcción RDKit del piloto AUY922–PEG2–VH032, docking Vina, ensamblaje PPI y checklist de viabilidad de laboratorio.",
+        body: "Construcción RDKit del piloto AUY922–PEG2–VH032, docking Vina, ensamblaje PPI, checklist de viabilidad y job AlphaFold Server HSP90–VHL sin PROTAC (archivado en 06_alphafold_server/).",
       },
       {
         heading: "Siguiente cómputo (póster)",
-        body: "Explorar longitudes PEG3–PEG5, AlphaFold 3, HADDOCK semiflexible, MD 50–100 ns (GROMACS/OpenMM) y predicción ADMET/toxicidad.",
+        body: "Explorar longitudes PEG3–PEG5, AF3 local con SMILES del PROTAC, HADDOCK semiflexible, MD 50–100 ns (GROMACS/OpenMM) y predicción ADMET/toxicidad.",
       },
       {
         heading: "Siguiente laboratorio",
         body: "Síntesis convergente por amidas, LC-MS/NMR y Western blot de degradación de HSP90 (y, si aplica, HSP70).",
+      },
+    ],
+  },
+  "alphafold-ppi": {
+    title: "AlphaFold PPI sin PROTAC",
+    description:
+      "Resultado archivado de AlphaFold Server: HSP90 NTD + VHL sin ligando, ipTM 0.52 e interfaz incierta.",
+    blocks: [
+      {
+        heading: "Qué se predijo",
+        body: "Co-plegado de HSP90-α NTD y VHL sin el PROTAC. El Server no acepta SMILES custom; solo ligandos CCD de lista fija.",
+      },
+      {
+        heading: "Scores (modelo 0)",
+        body: "ipTM 0.52, pTM 0.53, ranking_score 0.57. Los dominios individuales van mejor (pTM A ~0.74, B ~0.84); la interfaz relativa es la parte débil.",
+      },
+      {
+        heading: "Lectura para el proyecto",
+        body: "Sin el puente AUY922–PEG2–VH032, AF no respalda una PPI espontánea confiable. Refuerza el diseño ternario vía PROTAC (ver /alphafold y /visor).",
       },
     ],
   },

@@ -301,9 +301,9 @@ export function HomePage() {
             </h3>
             <p className="mt-4 leading-relaxed text-muted-foreground">
               Docking secuencial con AutoDock Vina, ensamble del complejo ternario, optimización
-              del linker, cero choques estéricos (&lt; 2,5 Å) y checklist de viabilidad de
-              laboratorio. La dinámica molecular (GROMACS) y el ADMET completo siguen en la hoja
-              de ruta del póster.
+              del linker, cero choques estéricos (&lt; 2,5 Å), checklist de viabilidad y predicción
+              AlphaFold Server de HSP90–VHL <em>sin</em> PROTAC (ipTM 0.52). La dinámica molecular
+              (GROMACS) y el ADMET completo siguen en la hoja de ruta del póster.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button asChild>
@@ -311,6 +311,9 @@ export function HomePage() {
                   Ver viabilidad
                   <ArrowRight data-icon="inline-end" />
                 </Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/alphafold">AlphaFold PPI</Link>
               </Button>
               <Button asChild variant="outline">
                 <Link to="/wiki/hoja-de-ruta">Hoja de ruta MD</Link>
@@ -356,8 +359,13 @@ export function HomePage() {
         <p className="mt-2 max-w-2xl text-muted-foreground">
           Tres entradas: evidencia previa a síntesis, estructura 3D y documentación técnica.
         </p>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[
+            {
+              to: "/resultados",
+              title: "Resultados y descargas",
+              body: "Scores Vina, métricas PPI y PDB/JSON listos para la defensa.",
+            },
             {
               to: "/viabilidad",
               title: "Viabilidad de laboratorio",
@@ -369,9 +377,19 @@ export function HomePage() {
               body: "HSP90, VHL y el puente PEG con superficies PPI interactivas.",
             },
             {
+              to: "/alphafold",
+              title: "AlphaFold sin PROTAC",
+              body: "ipTM 0.52: la PPI HSP90–VHL queda incierta sin el ligando puente.",
+            },
+            {
+              to: "/limitaciones",
+              title: "Limitaciones",
+              body: "Qué demuestra el modelo y qué no (Vina ≠ Kd, sin MD ni lab).",
+            },
+            {
               to: "/wiki",
               title: "Wiki técnica",
-              body: "Glosario, FAQ y hoja de ruta hacia HADDOCK, AlphaFold 3 y MD.",
+              body: "Glosario, FAQ y hoja de ruta hacia HADDOCK, AF3 local y MD.",
             },
           ].map((item, i) => (
             <Link

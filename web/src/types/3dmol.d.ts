@@ -23,6 +23,7 @@ declare module "3dmol" {
     selectedAtoms: (sel: object) => AtomSpec[]
     zoomTo: (sel?: object, duration?: number) => void
     zoom: (factor: number, animationDuration?: number) => void
+    resize: () => void
     render: () => void
     clear: () => void
   }

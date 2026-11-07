@@ -5,7 +5,11 @@
 [![Meeko 0.8](https://img.shields.io/badge/Parametrizacion-Meeko_0.8-eab308)](#3-flujo-del-pipeline-computacional)
 [![AutoDock Vina 1.2.5](https://img.shields.io/badge/Docking-AutoDock_Vina_1.2.5-f97316)](#4-resultados-de-estabilidad-y-acoplamiento-ppi)
 
-Repositorio bioinformático y quimioinformático para el **diseño racional, parametrización electrostática, docking secuencial, acoplamiento Proteína–Proteína (PPI) y validación termodinámica** de una quimera dirigida a la proteólisis (**PROTAC**) diseñada para degradar la chaperona oncogénica **HSP90-α** (sobreexpresada en cáncer de mama HER2+ y triple negativo) reclutando la ubiquitina ligasa E3 **VHL** (*Von Hippel-Lindau*).
+Repositorio bioinformático y quimioinformático para el **diseño racional, parametrización, docking secuencial, ensamble Proteína–Proteína (PPI) y checklist de viabilidad in silico** de una quimera dirigida a la proteólisis (**PROTAC**) orientada a degradar la chaperona oncogénica **HSP90-α** (relevante en cáncer de mama HER2+ y triple negativo) reclutando la ubiquitina ligasa E3 **VHL** (*Von Hippel-Lindau*).
+
+> **Alcance:** piloto computacional. Los scores de AutoDock Vina **no** son Kd experimentales; no hay aún MD ni ensayo celular. Ver portal `/limitaciones` y `LICENSE` (outputs AlphaFold: uso no comercial).
+
+**Portal web:** [https://web-topaz-eight-18.vercel.app](https://web-topaz-eight-18.vercel.app)
 
 ---
 
@@ -39,13 +43,13 @@ flowchart LR
         VH["[VHL] Ligando E3<br/>VH032"]
         VHL_PROT["E3 Ligasa VHL<br/>Bolsillo Tyr98 / His115"]
         
-        HSP <-->|"ΔG = -9.49 kcal/mol<br/>(Kd ≈ 110 nM)"| AUY
+        HSP <-->|"Score Vina ≈ -9.49 kcal/mol<br/>(heurística; ≠ Kd lab)"| AUY
         AUY --- LNK
         LNK --- VH
-        VH <-->|"ΔG = -6.56 kcal/mol<br/>(Kd ≈ 15 µM)"| VHL_PROT
-        HSP <-->|"Abrazo PPI Cooperativo<br/>121 contactos < 5 Å | 0 choques"| VHL_PROT
+        VH <-->|"Score Vina ≈ -6.56 kcal/mol<br/>(heurística; ≠ Kd lab)"| VHL_PROT
+        HSP <-->|"Abrazo PPI modelado<br/>121 contactos < 5 Å | 0 choques"| VHL_PROT
     end
-    Complejo_Ternario -->|"Transferencia de<br/>Ubiquitina"| DEG["Degradación de HSP90-α<br/>en el Proteasoma 26S"]
+    Complejo_Ternario -->|"Hipótesis de<br/>ubiquitinación"| DEG["Degradación de HSP90-α<br/>(requiere validación experimental)"]
 ```
 
 ---
@@ -60,8 +64,8 @@ La molécula se construye de forma modular en `scripts/01_construir_protac.py`:
 | **2. Linker** | `LNK` (Residuo `2`) | **Cadena PEG2**<br>(`-NH-CH2-CH2-O-CH2-CH2-O-CH2-C(=O)-`) | Otorga flexibilidad torsional (8 enlaces rotables) para acercar ambas proteínas en conformación *gauche* relajada (`6.4–7.0 Å`). |
 | **3. Ligando E3** | `VHL` (Residuo `3`) | **VH032**<br>*(Hidroxiprolina + tert-Leucina + Metiltiazol-bencilo)* | Recluta el dominio de reconocimiento de **VHL** mediante puentes de hidrógeno con **`Tyr98`** (`TYR 45`) e **`His115`** (`HIS 62`). |
 
-* **Fórmula Molecular:** $\text{C}_{52}\text{H}_{66}\text{N}_{8}\text{O}_{10}\text{S}$ (`136 átomos totales`: `71 pesados` + `65 hidrógenos`).
-* **Peso Molecular:** `995.21 g/mol` | **cLogP:** `5.20` | **TPSA:** `222.86 Å²`.
+* **Fórmula Molecular:** $\text{C}_{52}\text{H}_{65}\text{N}_{7}\text{O}_{11}\text{S}$ (`71 átomos pesados`; ver `scripts/04_viabilidad_laboratorio.py`).
+* **Peso Molecular:** `996.2 g/mol` | **cLogP:** `5.38` | **TPSA:** `238.15 Å²` | **SA Score:** `4.88`.
 
 ---
 
@@ -73,7 +77,8 @@ flowchart TD
     B --> C["3. Primer Docking en AutoDock Vina (03_docking_secuencial/)<br/>Grid Box en bolsillo Asp93 de HSP90 -> Modo 1: -9.489 kcal/mol"]
     C --> D["4. Segundo Docking en AutoDock Vina (03_docking_secuencial/)<br/>Grid Box en bolsillo Tyr98/His115 de VHL -> Pose activa: -6.561 kcal/mol"]
     D --> E["5. Ensamblaje Ternario y Optimización PPI (scripts/02_ensamblar_complejo_ternario.py)<br/>Maximización de contactos PPI + Vina --local_only + CONECT RDKit<br/>Salida: 04_complejo_ternario_final/complejo_ternario_limpio.pdb"]
-    E --> F["6. Validación y Visor 3D (scripts/03_analizar_estabilidad.py)<br/>05_visor_3d/visor_3d_complejo_ternario.html"]
+    E --> F["6. Análisis estabilidad + viabilidad<br/>scripts/03_analizar_estabilidad.py · 04_viabilidad_laboratorio.py"]
+    F --> G["7. Portal web/ + AlphaFold Server PPI sin PROTAC<br/>06_alphafold_server/ · rutas /visor /alphafold /limitaciones"]
 ```
 
 ---
@@ -82,8 +87,8 @@ flowchart TD
 
 | Métrica de Validación | Resultado Obtenido | Criterio Bioinformático | Interpretación |
 | :--- | :---: | :---: | :--- |
-| **Afinidad Bolsillo HSP90 ($\Delta G_1$)** | **`-9.489 kcal/mol`**<br>($K_d \approx 110.8\text{ nM}$) | $< -8.0\text{ kcal/mol}$ | Anclaje nanomolar fuerte del warhead NVP-AUY922 en `Asp93` y `Asn106`. |
-| **Afinidad Bolsillo VHL ($\Delta G_2$)** | **`-6.561 kcal/mol`**<br>($K_d \approx 15.5\ \mu\text{M}$) | $< -6.0\text{ kcal/mol}$ | Reconocimiento específico de la hidroxiprolina de VH032 por `Tyr98` e `His115`. |
+| **Score Vina bolsillo HSP90** | **`-9.489 kcal/mol`** | $< -8.0\text{ kcal/mol}$ | Anclaje favorable del warhead NVP-AUY922 en `Asp93`/`Asn106` (score docking, no Kd). |
+| **Score Vina bolsillo VHL** | **`-6.561 kcal/mol`** | $< -6.0\text{ kcal/mol}$ | Reconocimiento de VH032 frente a `Tyr98`/`His115` (score docking, no Kd). |
 | **Energía Intermolecular Ternaria** | **`-15.885 kcal/mol`** | $< -14.0\text{ kcal/mol}$ | Suma sinérgica de las interacciones del PROTAC dentro de ambos bolsillos simultáneamente. |
 | **Choques Estéricos Severos ($< 2.5\text{ \AA}$)** | **`0 choques`** | `0 choques` | Ninguna colisión atómica prohibida entre los átomos pesados de HSP90-α y VHL. |
 | **Distancia Mínima Proteína–Proteína** | **`2.729 Å`** | $2.7\text{ – }3.8\text{ \AA}$ | Contacto íntimo de van der Waals y puentes polares entre ambas superficies proteicas. |
@@ -157,7 +162,9 @@ protac_cancer_mama/
 │   ├── vhl.pdb                                # E3 Ligasa VHL (UniProt P40337)
 │   ├── protac.pdb                             # PROTAC optimizado con MMFF94s (.pdb)
 │   ├── protac.sdf                             # PROTAC con órdenes de enlace exactos (.sdf)
-│   └── alphafold3_input.json                  # Entrada lista para AlphaFold 3 Server
+│   ├── alphafold_server_hsp90_vhl.json        # Upload AlphaFold Server (solo proteínas)
+│   ├── alphafold3_input.json                  # Copia formato Server (array)
+│   └── alphafold3_local_input.json            # AF3 local + SMILES PROTAC
 │
 ├── 02_preparacion_pdbqt/                      # ⚡ Estructuras parametrizadas con Meeko (Gasteiger + Torsiones)
 │   ├── receptor_hsp90.pdbqt                   # Receptor rígido HSP90-α (.pdbqt)
@@ -178,12 +185,14 @@ protac_cancer_mama/
 │   ├── protac_en_complejo.pdb / .pdbqt        # Conformación puente final del PROTAC
 │   └── receptor_ternario_hsp90_vhl.pdbqt      # Receptores combinados HSP90 + VHL
 │
-├── web/                                       # 🖥️ Portal React + shadcn (Vercel outputDirectory)
-│   ├── src/pages/                             # Inicio, viabilidad, visor 3D, wiki
+├── web/                                       # 🖥️ Portal React + shadcn (Vercel Root Directory)
+│   ├── src/pages/                             # Inicio, resultados, viabilidad, visor, AF, limitaciones, wiki
 │   ├── src/components/ui/                     # Componentes shadcn
-│   └── public/data/                           # PDB + JSON de viabilidad
+│   └── public/data/                           # PDB ternario + JSON viabilidad + AF
 │
-├── 05_visor_3d/                               # Portal HTML legacy (referencia)
+├── 06_alphafold_server/                       # Job AF Server HSP90–VHL sin PROTAC (archivado)
+│
+├── 05_visor_3d/                               # Portal HTML legacy (DEPRECATED.md)
 │
 ├── bin/                                       # ⚙️ Motor de simulación
 │   └── vina                                   # Ejecutable AutoDock Vina v1.2.5 (macOS arm64)
@@ -193,7 +202,10 @@ protac_cancer_mama/
 │   ├── 02_arquitectura_y_pipeline_computacional.md
 │   ├── 03_analisis_fisicoquimico_y_estabilidad.md
 │   ├── 04_guia_visualizacion_3d_y_ejecucion.md
-│   └── 05_viabilidad_laboratorio.md           # Reporte markdown generado por el script 04
+│   ├── 05_viabilidad_laboratorio.md           # Reporte markdown generado por el script 04
+│   └── 06_alphafold_server.md                 # Formato Server + lectura ipTM
+│
+├── LICENSE                                    # MIT + aviso outputs AlphaFold
 │
 └── wiki/                                      # 🌐 Fuentes Markdown de la wiki
     ├── Home.md

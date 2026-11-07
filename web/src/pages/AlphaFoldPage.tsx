@@ -65,7 +65,7 @@ export function AlphaFoldPage() {
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
           Job <span className="text-foreground">{report.job_name}</span>: solo HSP90-α NTD + VHL.
-          El Server no admite el SMILES del PROTAC; este resultado documenta la interfaz{" "}
+          El Server no admite el SMILES del PROTAC; el resultado muestra la interfaz{" "}
           <em>sin</em> el puente AUY922–PEG2–VH032.
         </p>
         <div className="mt-5 flex flex-wrap items-center gap-3">

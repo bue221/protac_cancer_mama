@@ -59,7 +59,7 @@ export function WikiPage() {
         >
           <h2 className="font-heading text-xl font-semibold">Resultados y descargas</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Tabla Vina/PPI y PDB/JSON para anexos.
+            Tabla Vina/PPI y archivos PDB/JSON descargables.
           </p>
         </Link>
         <Link

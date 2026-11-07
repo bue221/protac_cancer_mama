@@ -55,14 +55,14 @@ const content: Record<
   "hoja-de-ruta": {
     title: "Hoja de ruta",
     description:
-      "Siguientes pasos del póster RedColsi: AlphaFold 3, HADDOCK, dinámica molecular (GROMACS), ADMET y validación experimental.",
+      "Siguientes pasos: AlphaFold 3 local, HADDOCK, dinámica molecular (GROMACS), ADMET y validación experimental.",
     blocks: [
       {
-        heading: "Ya en el repo",
+        heading: "Ya completado",
         body: "Construcción RDKit del piloto AUY922–PEG2–VH032, docking Vina, ensamblaje PPI, checklist de viabilidad y job AlphaFold Server HSP90–VHL sin PROTAC (archivado en 06_alphafold_server/).",
       },
       {
-        heading: "Siguiente cómputo (póster)",
+        heading: "Siguiente cómputo",
         body: "Explorar longitudes PEG3–PEG5, AF3 local con SMILES del PROTAC, HADDOCK semiflexible, MD 50–100 ns (GROMACS/OpenMM) y predicción ADMET/toxicidad.",
       },
       {

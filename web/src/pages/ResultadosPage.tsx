@@ -59,7 +59,8 @@ export function ResultadosPage() {
           Resultados
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Números del pipeline Vina + ensamble ternario. Los scores no son Kd de laboratorio; ver{" "}
+          Métricas del docking secuencial y del ensamble ternario. Los scores de Vina no equivalen
+          a Kd experimental; detalle en{" "}
           <Link to="/limitaciones" className="text-primary hover:underline">
             limitaciones
           </Link>

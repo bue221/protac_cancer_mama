@@ -42,8 +42,9 @@ export function LimitacionesPage() {
         Limitaciones
       </h1>
       <p className="mt-4 text-lg text-muted-foreground">
-        Este portal documenta un piloto <strong className="text-foreground">computacional</strong>.
-        Léelo así en la defensa: priorización de síntesis, no prueba clínica.
+        Trabajo <strong className="text-foreground">computacional</strong> de priorización: sirve
+        para decidir si la molécula merece síntesis, no como prueba clínica ni de degradación
+        celular.
       </p>
 
       <div className="mt-10 space-y-8">

@@ -17,9 +17,8 @@ export function VisorPage() {
           Complejo ternario
         </h1>
         <p className="mt-3 text-muted-foreground">
-          El ensamble que el póster describe como paso clave: HSP90-α, el puente PEG y VHL en la
-          misma escena. Usa <b>Estilo</b>, tags, leyenda y superficies PPI para inspeccionar Asp93
-          y el reclutamiento de VHL.
+          Complejo ternario HSP90-α–PROTAC–VHL. Usa <b>Estilo</b>, etiquetas, leyenda y superficies
+          PPI para inspeccionar Asp93, el puente PEG2 y el reclutamiento de VHL.
         </p>
       </section>
 

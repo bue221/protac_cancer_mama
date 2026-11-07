@@ -81,15 +81,15 @@ export function HomePage() {
 
         <div className="relative mx-auto flex min-h-[calc(100vh-3.5rem)] w-full max-w-6xl flex-col justify-center px-4 py-16 sm:px-6">
           <p className="animate-rise font-mono text-xs tracking-[0.22em] text-primary uppercase">
-            RedColsi · Universidad Colegio Mayor de Cundinamarca
+            Diseño y simulación computacional
           </p>
           <h1 className="animate-rise-delay-1 font-heading mt-4 max-w-[16ch] text-4xl leading-[0.95] font-semibold tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-7xl">
             PROTAC para cáncer de mama
           </h1>
           <div className="animate-underline mt-5 h-px w-28 bg-primary" />
           <p className="animate-rise-delay-2 mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Diseño computacional de una quimera AUY922–PEG–VH032 que recluta VHL para
-            degradar chaperonas HSP y abrir una vía distinta a la inhibición clásica.
+            Quimera AUY922–PEG2–VH032 que une HSP90-α a la ligasa E3 VHL para inducir
+            degradación proteasomal, como alternativa a la inhibición clásica del bolsillo ATP.
           </p>
 
           <div className="animate-rise-delay-2 mt-8 flex flex-wrap gap-3">
@@ -152,9 +152,9 @@ export function HomePage() {
               marca con ubiquitina y la manda al proteasoma.
             </p>
             <p className="mt-6 border-l-2 border-primary/40 pl-4 text-base leading-relaxed text-ink">
-              Pregunta guía del póster: ¿cómo el diseño estructural de un nuevo inhibidor
-              (PROTAC) mejora la eficiencia en la degradación de proteínas HSP en el cáncer de
-              mama?
+              Pregunta del proyecto: ¿un PROTAC estructuralmente diseñado puede acercar HSP90
+              y VHL lo suficiente para degradar la chaperona de forma más eficiente que un
+              inhibidor ocupacional en cáncer de mama?
             </p>
           </div>
           <PosterFigure
@@ -187,9 +187,9 @@ export function HomePage() {
               Asp93) es una estrategia para desestabilizar ese eje en cáncer de mama agresivo.
             </p>
             <p className="mt-4 leading-relaxed text-muted-foreground">
-              El póster contempla también anclajes en HSP70; este portal prioriza el piloto
-              computacional sobre <strong className="font-medium text-foreground">HSP90-α–VHL</strong>,
-              ya modelado en 3D.
+              HSP70 es otra diana posible en la misma vía; el modelo actual se centra en el
+              piloto <strong className="font-medium text-foreground">HSP90-α–VHL</strong>, ya
+              dockeado y ensamblado en 3D.
             </p>
           </div>
         </div>
@@ -262,13 +262,11 @@ export function HomePage() {
               Arquitectura del candidato
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              El póster propone cabeza <span className="text-foreground">NVP-AUY922</span>, cola{" "}
-              <span className="text-foreground">VH032</span> y conectores{" "}
-              <span className="text-foreground">PEG3–PEG5</span> en espacio Beyond Rule of Five.
-              En este repositorio el piloto ensamblado y dockeado es{" "}
-              <span className="text-foreground">AUY922–PEG2–VH032</span>: mismo esquema modular,
-              linker más corto para forzar el abrazo PPI y validar geometría antes de explorar
-              longitudes mayores.
+              El candidato usa cabeza <span className="text-foreground">NVP-AUY922</span> (warhead
+              HSP90), cola <span className="text-foreground">VH032</span> (ligando VHL) y un
+              puente <span className="text-foreground">PEG2</span>. Longitudes PEG3–PEG5 quedan
+              abiertas para SAR; PEG2 sirve para comprobar si el abrazo PPI es geométricamente
+              viable con un linker corto.
             </p>
             <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
               <li>
@@ -279,7 +277,7 @@ export function HomePage() {
                 · Reclutamiento E3: bolsillo VHL vía VH032 (
                 <span className="text-foreground">Tyr98 / His115</span>)
               </li>
-              <li>· En el póster también se listan residuos de HSP70 para una línea futura</li>
+              <li>· Expansión posible: bolsillos de HSP70 y variantes de linker</li>
             </ul>
           </div>
           <PosterFigure
@@ -297,13 +295,13 @@ export function HomePage() {
           />
           <div className="flex flex-col justify-center">
             <h3 className="font-heading text-2xl font-semibold text-ink">
-              Qué ya está computado aquí
+              Qué está calculado
             </h3>
             <p className="mt-4 leading-relaxed text-muted-foreground">
               Docking secuencial con AutoDock Vina, ensamble del complejo ternario, optimización
-              del linker, cero choques estéricos (&lt; 2,5 Å), checklist de viabilidad y predicción
-              AlphaFold Server de HSP90–VHL <em>sin</em> PROTAC (ipTM 0.52). La dinámica molecular
-              (GROMACS) y el ADMET completo siguen en la hoja de ruta del póster.
+              del linker, cero choques estéricos (&lt; 2,5 Å), checklist de viabilidad sintética y
+              predicción AlphaFold Server de HSP90–VHL <em>sin</em> PROTAC (ipTM 0.52). Pendiente:
+              dinámica molecular (GROMACS/OpenMM) y perfil ADMET más completo.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button asChild>
@@ -333,9 +331,9 @@ export function HomePage() {
             Del bolsillo al complejo ternario
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Flujo del póster: estructuras proteicas → identificación de pockets → diseño del
-            PROTAC → acoplamiento molecular → dinámica → predicción ADMET. Este sitio documenta
-            sobre todo el tramo de diseño, docking y viabilidad.
+            Pipeline: estructuras proteicas → identificación de bolsillos → diseño del PROTAC →
+            acoplamiento molecular → (siguiente) dinámica y ADMET. Aquí se cubre diseño, docking,
+            ensamble ternario y viabilidad in silico.
           </p>
 
           <div className="mt-10 grid gap-8 md:grid-cols-2">
@@ -347,7 +345,7 @@ export function HomePage() {
             <PosterFigure
               src="/poster/dinamica-gromacs.png"
               alt="Caja de simulación de dinámica molecular"
-              caption="Siguiente paso del póster: relajar el ternario en agua explícita (GROMACS / OpenMM)."
+              caption="Paso siguiente: relajar el ternario en agua explícita (GROMACS / OpenMM)."
             />
           </div>
         </div>
@@ -357,14 +355,14 @@ export function HomePage() {
       <section className="mx-auto w-full max-w-6xl px-4 py-20 sm:px-6">
         <h2 className="font-heading text-2xl font-semibold tracking-tight">Explorar el modelo</h2>
         <p className="mt-2 max-w-2xl text-muted-foreground">
-          Tres entradas: evidencia previa a síntesis, estructura 3D y documentación técnica.
+          Resultados, estructura 3D, viabilidad, AlphaFold y documentación técnica.
         </p>
         <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[
             {
               to: "/resultados",
               title: "Resultados y descargas",
-              body: "Scores Vina, métricas PPI y PDB/JSON listos para la defensa.",
+              body: "Scores Vina, métricas PPI y archivos PDB/JSON descargables.",
             },
             {
               to: "/viabilidad",

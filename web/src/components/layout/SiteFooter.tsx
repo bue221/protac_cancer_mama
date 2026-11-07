@@ -10,9 +10,9 @@ export function SiteFooter() {
               PROTAC · cáncer de mama
             </p>
             <p>
-              Diseño computacional de un PROTAC HSP–VHL como alternativa terapéutica. Basado en el
-              póster RedColsi Nacional (Martínez-Burbano DV, Martínez-González LG · Bacteriología y
-              Laboratorio Clínico, Universidad Colegio Mayor de Cundinamarca).
+              Portal del proyecto PROTAC HSP90–VHL: docking, complejo ternario, viabilidad in
+              silico y contraste AlphaFold. Autores: Martínez-Burbano DV, Martínez-González LG ·
+              Bacteriología y Laboratorio Clínico, Universidad Colegio Mayor de Cundinamarca.
             </p>
             <p className="text-xs leading-relaxed">
               Modelo preliminar in silico: no sustituye síntesis, ADMET experimental ni bioensayo

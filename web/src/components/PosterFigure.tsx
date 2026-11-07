@@ -10,7 +10,7 @@ export function PosterFigure({
   src,
   alt,
   caption,
-  credit = "Figura del póster RedColsi Nacional · Martínez-Burbano DV & Martínez-González LG",
+  credit = "Ilustración del proyecto · Martínez-Burbano DV & Martínez-González LG",
   className,
 }: PosterFigureProps) {
   return (

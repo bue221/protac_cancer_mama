@@ -68,16 +68,15 @@ export function ViabilidadPage() {
       />
       <section className="animate-rise max-w-3xl">
         <p className="font-mono text-xs tracking-[0.2em] text-primary uppercase">
-          Checklist · objetivo del póster
+          Checklist in silico
         </p>
         <h1 className="font-heading mt-3 text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
           Viabilidad de laboratorio
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Antes de gastar reactivos: el póster pide predecir el perfil del PROTAC. Aquí ves{" "}
-          <strong className="text-foreground">cómo</strong> se calcularon las métricas del piloto
-          AUY922–PEG2–VH032 y <strong className="text-foreground">por qué</strong> importan para
-          decidir si merece síntesis.
+          Antes de síntesis: propiedades, bloques modulares, alertas y geometría del piloto
+          AUY922–PEG2–VH032. Cada check indica <strong className="text-foreground">cómo</strong> se
+          calculó y <strong className="text-foreground">por qué</strong> importa.
         </p>
       </section>
 

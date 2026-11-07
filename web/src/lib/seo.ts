@@ -5,7 +5,7 @@ export const SITE_URL =
 export const SITE_NAME = "PROTAC · cáncer de mama"
 
 export const DEFAULT_DESCRIPTION =
-  "Diseño de un PROTAC como alternativa al tratamiento del cáncer de mama: por qué atacar HSP90/HSP70, mecanismo VHL, docking, viabilidad de laboratorio y visor 3D del complejo ternario."
+  "Diseño computacional de un PROTAC HSP90–AUY922–PEG2–VH032–VHL: mecanismo, docking, viabilidad in silico, AlphaFold PPI y visor 3D del complejo ternario."
 
 export type PageSeo = {
   title: string

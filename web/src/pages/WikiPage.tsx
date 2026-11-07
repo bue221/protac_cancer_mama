@@ -37,8 +37,8 @@ export function WikiPage() {
         <p className="font-mono text-xs tracking-[0.2em] text-primary uppercase">Documentación</p>
         <h1 className="font-heading mt-3 text-4xl font-semibold tracking-tight text-ink">Wiki</h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Complemento del póster RedColsi: glosario, FAQ y la hoja de ruta (HADDOCK, AlphaFold 3,
-          dinámica molecular) para pasar del piloto PEG2 a validación más rigurosa.
+          Glosario, FAQ y hoja de ruta (HADDOCK, AlphaFold 3 local, dinámica molecular) para
+          pasar del piloto PEG2 a validación más rigurosa.
         </p>
       </section>
 
